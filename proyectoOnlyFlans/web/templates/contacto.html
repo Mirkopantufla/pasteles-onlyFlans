@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 col-md-8 m-auto p-5">
+        <h1 class="text-center">Contacto</h1>
+        <form action="{% url 'contacto'%}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="fieldWrapper p-2">
+                <label class="fs-5" for="">{{ field.label_tag }}</label>
+                <div class="campo">{{ field }}</div>
+                {% for error in field.errors %}
+                <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <br>
+            <button class="btn btn-flans" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

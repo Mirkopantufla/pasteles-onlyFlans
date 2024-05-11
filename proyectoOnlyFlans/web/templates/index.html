@@ -1,3 +1,46 @@
 {% extends 'base.html' %}
 
-{% block content %} Indice {% endblock %}
+{% block content %}
+<div class="row">
+    {% if not user.is_authenticated %}
+    <div class="col-12 primary-bg-flan-color p-5 text-center">
+        <h1>
+            Bienvenido
+        </h1>
+        <p>
+            Tenemos una lista de recetas de flanes exclusivos para nuestros usuarios, ¿Quieres conocer más?
+        </p>
+        <div>
+            <a href="{% url 'login'%}" class="btn btn-flans">
+                Inicia Sesion
+            </a>
+            <a href="{% url 'register'%}" class="btn btn-flans">
+                Registrate
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    {% for flan in public_flans %}
+    <div
+        class="offset-1 col-10 offset-sm-2 col-sm-8 offset-md-0 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center align-items-stretch my-2">
+        <div class="card my-2">
+            <img src="{{flan.image_url}}" class="card-img-top object-fit-cover" alt="..." width="200px" height="200px">
+            <div class="card-body">
+                <h5 class="card-title text-center ellipsed-title">
+                    {{flan.name}}
+                </h5>
+                <p class="card-text p-1">
+                    {{flan.description}}
+                </p>
+                {% if user.is_authenticated %}
+                <a href="/descripcion/{{flan.flan_uuid}}/" class="btn btn-flans w-100 ellipsed-title">
+                    Receta {{flan.name}}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

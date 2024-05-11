@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 d-flex flex-column text-center">
+        <div class="background-opacity my-3 py-3">
+            <h1>{{ flan.name}}</h1>
+            <p class="fs-5">{{ flan.description}}</p>
+        </div>
+        <div class="my-4">
+            <img class="border-flan" src="{{ flan.image_url}}" alt="" width="500px" height="400px">
+        </div>
+        <div class="background-opacity my-3">
+            <h3>Ingredientes</h3>
+            <pre>{{ flan.ingredients}}</pre>
+        </div>
+        <div class="offset-2 col-8 my-3">
+            <h3>Preparación</h3>
+            <p class="formated-text px-5">{{ flan.preparation}}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
